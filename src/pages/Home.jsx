@@ -12,7 +12,7 @@ function Home() {
   const fetchTasks = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost/task-manager-project/backend/tasks/get_tasks.php');
+      const response = await axios.get('https://muhaitheef.infinityfreeapp.com/tasks/get_tasks.php');
       
       if (response.data.status === 'success') {
         setTasks(response.data.data);
