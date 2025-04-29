@@ -26,7 +26,7 @@ function Contact() {
 
     try {
       const response = await axios.post(
-        'https://muhaitheef.infinityfreeapp.com/contact/submit_contact.php',
+        'http://muhaitheef.infinityfreeapp.com/contact/submit_contact.php',
         formData,
         {
           headers: {
