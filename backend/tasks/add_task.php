@@ -52,6 +52,11 @@ if (json_last_error() !== JSON_ERROR_NONE) {
 // Extract and sanitize data
 $title = isset($data['title']) ? trim($data['title']) : '';
 $description = isset($data['description']) ? trim($data['description']) : '';
+$category = isset($data['category']) ? trim($data['category']) : 'General';
+$priority = isset($data['priority']) ? trim($data['priority']) : 'Medium';
+$due_date = isset($data['due_date']) ? trim($data['due_date']) : null;
+$tags = isset($data['tags']) ? json_encode($data['tags']) : '[]';
+$progress = isset($data['progress']) ? (int)$data['progress'] : 0;
 
 // Validate required fields
 if (empty($title)) {
@@ -74,18 +79,16 @@ if (strlen($title) > 255) { // Assuming title has a VARCHAR(255) constraint
 // Insert task into database
 try {
     // Use a prepared statement with all three parameters bound explicitly
-    $sql = "INSERT INTO tasks (title, description, status) VALUES (?, ?, ?)";
+    $sql = "INSERT INTO tasks (title, description, category, priority, due_date, tags, progress, status, created_at) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, 'Pending', NOW())";
     $stmt = $conn->prepare($sql);
     
     if (!$stmt) {
         throw new Exception("Prepare failed: " . $conn->error);
     }
     
-    // Define status explicitly as a variable
-    $status = "Pending"; // Exact match for ENUM value
-    
     // Bind all three parameters including status
-    $stmt->bind_param("sss", $title, $description, $status);
+    $stmt->bind_param("ssssssi", $title, $description, $category, $priority, $due_date, $tags, $progress);
     
     if ($stmt->execute()) {
         $response = [
