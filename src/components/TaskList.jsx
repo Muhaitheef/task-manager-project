@@ -8,8 +8,7 @@ function TaskList({ tasks, refreshTasks }) {
   const handleMarkDone = async (id) => {
     try {
       const response = await axios.post(
-        'http://localhost/task-manager-project/backend/tasks/update_task.php',
-        {
+        'https://muhaitheef.infinityfreeapp.com/tasks/update_task.php',{
           id: id,
           status: 'Done',
           progress: 100
@@ -34,7 +33,7 @@ function TaskList({ tasks, refreshTasks }) {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this task?')) {
       try {
-        await axios.post('http://localhost/task-manager-project/backend/tasks/delete_task.php', {
+        await axios.post('https://muhaitheef.infinityfreeapp.com/tasks/delete_task.php', {
           id: id
         });
         refreshTasks();
@@ -47,7 +46,7 @@ function TaskList({ tasks, refreshTasks }) {
   const handleUpdateProgress = async (id, progress) => {
     try {
       const response = await axios.post(
-        'http://localhost/task-manager-project/backend/tasks/update_task.php',
+        'https://muhaitheef.infinityfreeapp.com/tasks/update_task.php',
         {
           id: id,
           progress: progress
