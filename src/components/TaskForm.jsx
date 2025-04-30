@@ -52,7 +52,7 @@ function TaskForm({ onTaskAdded }) {
 
     try {
       const response = await axios.post(
-        'http://localhost/task-manager-project/backend/tasks/add_task.php',
+        'https://muhaitheef.infinityfreeapp.com/tasks/add_task.php',
         formData,
         {
           headers: {
