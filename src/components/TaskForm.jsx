@@ -51,10 +51,7 @@ function TaskForm({ onTaskAdded }) {
     setIsSubmitting(true);
 
     try {
-      const response = await axios.post(
-        'https://muhaitheef.infinityfreeapp.com/tasks/add_task.php',
-        formData,
-        {
+      const response = await axios.post('https://muhaitheef.infinityfreeapp.com/tasks/add_task.php', formData, {
           headers: {
             'Content-Type': 'application/json'
           }
